@@ -100,7 +100,7 @@
 				}
 			},
 			// Find and select specific string or regexp
-			find: function() {
+			select: function() {
 				var arg = arguments[0];
 
 				if(typeof arg === "string") {

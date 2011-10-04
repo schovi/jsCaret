@@ -3,8 +3,6 @@ Recently I tried to find solution how to handle caret/pointer within textareas a
 Here is result of my trying.
 It is first and early version which does what we need without any optimalization or deep thinking :)
 
-***
-
 ## Usage
 
 Getting of caret object.

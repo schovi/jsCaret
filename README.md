@@ -81,6 +81,15 @@ Getting of caret object.
 
 		$('textarea').caret().set(3,10).text("new text").endCaret().style('font-size', '20px')
 
+###Examples
+
+There are two examples.
+
+* **simple_example.html** It shows just how to get and set cursor/selection
+
+* **custom_cursor.html** It is advanced example, where i replace default cursor with custom one (it is just graphic over, not system replace :) )
+
+
 ## Thanks to
 
 This plugin grows from our needs.

@@ -1,9 +1,7 @@
-Recently I tried to find solution how to handle caret/pointer within textareas and inputs for our project. I found lot of code parts or unsatisfied plugins. So my personal goal was to create conplex and universal jQuery plugin.
+I recently tried to find solution how to handle a caret/pointer within textareas and inputs for our project. I have found a lot of code parts or unsatisfactory plugins. So my personal goal was to create a complex and universal jQuery plugin.
 
-Here is result of my trying.
+Here is the result of my trying.
 It is first and early version which does what we need without any optimalization or deep thinking :)
-
-***
 
 ## Usage
 

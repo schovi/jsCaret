@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Careter</title>
+	<meta name="robots" content="index, all" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+	<script src="./../jquery_missing-caret-control.js" type="text/javascript"></script>
+</head>
+<body>
+	<textarea cols="50" rows="6" id="t">Hello how are you</textarea><br />
+	start: <input type="text" id="start" /><br />
+	end: <input type="text" id="end" /><br />
+	<button id="setCaret">Set</button><br />
+	<button id="getCaret">Get</button>	
+	<script type="text/javascript">
+		$(function() {
+			t = $('#t');
+			c = t.caret();
+			s = $('#start');
+			e = $('#end');
+			
+			$('#setCaret').click(function() {
+				c.set(parseInt(s.val()),parseInt(e.val()));
+			})
+
+			$('#getCaret').click(function() {
+				var position = c.get();
+				alert('start:' + position.start + ' end: ' + position.end);
+			})
+
+		})
+	</script>
+</body>
+</html>
+

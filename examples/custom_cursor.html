@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js" type="text/javascript"></script>
+	<script src="./../jquery_missing-caret-control.js" type="text/javascript"></script>
+	<style>
+		#main {position:relative}
+		textarea {font-size:25px}
+	</style>
+	<script type="text/javascript">
+	jQuery(function() {
+		var textarea = jQuery('textarea'),
+		caret = textarea.caret(),
+		pointer = jQuery('<div style="width:5px;border:1px solid orange;position:absolute"></div>'),
+		virtual = jQuery('<span class="virtual">'),
+		textareaTopOfsset = parseInt(textarea.css('border-top-width')) + parseInt(textarea.css('margin-top')) + parseInt(textarea.css('padding-top')),
+		textareaLeftOfsset = parseInt(textarea.css('border-left-width')) + parseInt(textarea.css('margin-left')) + parseInt(textarea.css('padding-left'));
+
+		virtual.css({
+			'font-size': textarea.css('font-size'),
+			'font-family': textarea.css('font-family'),
+			'font-style': textarea.css('font-style'),
+			'font-weight': textarea.css('font-weight'),
+			'font-variant': textarea.css('font-variant'),
+			'line-height': textarea.css('line-height')
+		});
+
+		jQuery('body').append(virtual);
+		jQuery('#main').append(pointer);
+
+		textarea.bind('keydown keypress keyup scroll', function() {
+			var text = textarea.val().substring(0,caret.start()),
+				scrollTop = textarea.scrollTop(),
+				scrollLeft = textarea.scrollLeft(),
+				result;
+				
+			result = computeMeasures(text, textarea.width());
+			
+			pointer.css({
+				left: -scrollLeft + textareaLeftOfsset + result.fromLeft,
+				top: -scrollTop + textareaTopOfsset + result.lineHeight * (result.lines),
+				height: result.lineHeight + 'px'
+			})
+			// console.log('lineHeight:', result.lineHeight, ' fromLeft:', result.fromLeft, ' lines:', result.lines)
+		})
+
+		function computeMeasures(text, width) {
+			var result = {
+				lines: 0
+			};
+			virtual.show();
+			// Výška řádku
+			result.lineHeight = virtual.text("a").height();
+			
+			// počet řádek
+			var textLen = text.length,
+				newLineCharIndex = 0;
+			
+			for(var i=1; i <= textLen; i++) {
+				virtual.text(text.substring(newLineCharIndex - 1,i));
+				
+				var lastChar = text.substring(i - 1,i)
+				
+				if(virtual.width() > width || lastChar == "\n") {
+					result.lines ++;
+					newLineCharIndex = i;
+				}
+			}
+			
+			result.fromLeft = virtual.text(text.substring(newLineCharIndex - 1, textLen)).width();
+			virtual.hide();
+			return result;
+		}
+	})
+	</script>
+</head>
+<body>
+	<div id="main">
+		<textarea cols="10" rows="4"></textarea>
+	</div>
+</body>
+</html>

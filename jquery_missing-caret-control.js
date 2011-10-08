@@ -2,6 +2,7 @@
 	var msie = $.browser.msie;
 
 	function getCaret(element) {
+		var start, end;
 		if(msie) {
 			var selection = document.selection;
 			if (element.tagName.toLowerCase() != "textarea") {
@@ -47,8 +48,8 @@
 	}
 	
 	$.fn.caret = function() {
-		var self = this,
-		$self = self[0],
+		var $element = this,
+		element = $element[0],
 		start, end, caret;
 
 		return {
@@ -67,21 +68,21 @@
 					return this;
 				}
 
-				setCaret($self, start, end);
+				setCaret(element, start, end);
 
 				return this;
 			},
 			// Get start and end of caret
 			get: function() {
-				return getCaret($self);
+				return getCaret(element);
 			},
 			// Set or get start of caret
 			start: function() {
-				caret = getCaret($self);
+				caret = getCaret(element);
 				
 				if(arguments[0] && typeof arguments[0] === "number") {
 					// TODO nastavit začátek kurzoru
-					setCaret($self,arguments[0], caret.end);
+					setCaret(element,arguments[0], caret.end);
 					return this;
 				} else {
 					return caret.start;
@@ -89,11 +90,11 @@
 			},
 			// Set or get end of caret
 			end: function() {
-				caret = getCaret($self);
+				caret = getCaret(element);
 				
 				if(arguments[0] && typeof arguments[0] === "number") {
 					// TODO nastavit začátek kurzoru
-					setCaret($self,caret.start, arguments[0]);
+					setCaret(element,caret.start, arguments[0]);
 					return this;
 				} else {
 					return caret.end;
@@ -104,13 +105,13 @@
 				var arg = arguments[0];
 
 				if(typeof arg === "string") {
-					if((start = $self.value.indexOf(arg)) >- 1) {
+					if((start = element.value.indexOf(arg)) >- 1) {
 						end = start + arg.length;
 					} else {
 						start = null;
 					}
 				} else if(Object.prototype.toString.call(arg) === "[object RegExp]") {
-					var re = arg.exec($self.value);
+					var re = arg.exec(element.value);
 
 					if(re != null) {
 						start = re.index;
@@ -119,30 +120,30 @@
 				}
 
 				if(typeof(start) !== "undefined" && typeof(end) !== "undefined") {
-					setCaret($self,start,end);
+					setCaret(element,start,end);
 				}
 				
 				return this;
 			},
 			// Insert string to caret, or replace selection
 			insert: function(text) {
-				caret = getCaret($self);
-    		$self.value = $self.value.substr(0, caret.start) + text + $self.value.substr(caret.end, $self.value.length);
-				setCaret($self, caret.start, caret.start + text.length);
+				caret = getCaret(element);
+    		element.value = element.value.substr(0, caret.start) + text + element.value.substr(caret.end, element.value.length);
+				setCaret(element, caret.start, caret.start + text.length);
 				return this;
 			},
 			// Insert string before caret or selection
 			insertBefore: function(text) {
-				caret = getCaret($self);
-    		$self.value = $self.value.substr(0, caret.start) + text + $self.value.substr(caret.start, $self.value.length);
-				setCaret($self,caret.start + text.length, caret.end + text.length);
+				caret = getCaret(element);
+    		element.value = element.value.substr(0, caret.start) + text + element.value.substr(caret.start, element.value.length);
+				setCaret(element,caret.start + text.length, caret.end + text.length);
 				return this;
 			},
 			// Insert string after caret or selection
 			insertAfter: function(text) {
-				caret = getCaret($self);
-				$self.value = $self.value.substr(0, caret.end) + text + $self.value.substr(caret.end, $self.value.length);
-				setCaret($self,caret.start, caret.end);
+				caret = getCaret(element);
+				element.value = element.value.substr(0, caret.end) + text + element.value.substr(caret.end, element.value.length);
+				setCaret(element,caret.start, caret.end);
 				return this;
 			},
 			// Return selected text from selection
@@ -151,35 +152,35 @@
 					this.insert(arguments[0])
 					return this;
 				} else {
-					caret = getCaret($self);
-					return $self.value.substring(caret.start, caret.end)//.replace(/ /g, '\xa0') || '\xa0'	
+					caret = getCaret(element);
+					return element.value.substring(caret.start, caret.end)//.replace(/ /g, '\xa0') || '\xa0'	
 				}
 			},
 			// Get string before caret or selection
 			before: function() {
-				caret = getCaret($self);
+				caret = getCaret(element);
 				if(arguments[0]) {
-					$self.value = arguments[0] + $self.value.substring(caret.start, $self.value.length);
-					setCaret($self, arguments[0].length, arguments[0].length + (caret.end - caret.start));
+					element.value = arguments[0] + element.value.substring(caret.start, element.value.length);
+					setCaret(element, arguments[0].length, arguments[0].length + (caret.end - caret.start));
 					return this;
 				} else {
-					return $self.value.substring(0, caret.start)//.replace(/ /g, '\xa0') || '\xa0'
+					return element.value.substring(0, caret.start)//.replace(/ /g, '\xa0') || '\xa0'
 				}
 			},
 			// Get string after caret or selection
 			after: function() {
-				caret = getCaret($self);
+				caret = getCaret(element);
 				if(arguments[0]) {
-					$self.value = $self.value.substring(0, caret.end) + arguments[0];
-					setCaret($self, caret.start, caret.end);
+					element.value = element.value.substring(0, caret.end) + arguments[0];
+					setCaret(element, caret.start, caret.end);
 					return this;
 				} else {
-					return $self.value.substring(caret.end)//.replace(/ /g, '\xa0') || '\xa0'	
+					return element.value.substring(caret.end)//.replace(/ /g, '\xa0') || '\xa0'	
 				}
 			},
 			// Return original jQuery element
 			endCaret: function() {
-				return self;
+				return $element;
 			}
 		}
 	}

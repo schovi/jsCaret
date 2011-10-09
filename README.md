@@ -89,6 +89,11 @@ There are two examples.
 
 * **custom_cursor.html** It is advanced example, where i replace default cursor with custom one (it is just graphic over, not system replace :) )
 
+## Future
+
+* Make versions for other frameworks and pure javascript.
+
+
 
 ## Thanks to
 

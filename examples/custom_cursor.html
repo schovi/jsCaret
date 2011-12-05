@@ -3,7 +3,8 @@
 <html>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js" type="text/javascript"></script>
-	<script src="./../jquery_missing-caret-control.js" type="text/javascript"></script>
+	<script src="./../jsCaret.js" type="text/javascript"></script>
+	<script src="./../jsCaret-jQuery.js" type="text/javascript"></script>
 	<style>
 		#main {position:relative}
 		textarea {font-size:25px}
@@ -11,11 +12,11 @@
 	<script type="text/javascript">
 	jQuery(function() {
 		var textarea = jQuery('textarea'),
-		caret = textarea.caret(),
-		pointer = jQuery('<div style="width:5px;border:1px solid orange;position:absolute"></div>'),
-		virtual = jQuery('<span class="virtual">'),
-		textareaTopOfsset = parseInt(textarea.css('border-top-width')) + parseInt(textarea.css('margin-top')) + parseInt(textarea.css('padding-top')),
-		textareaLeftOfsset = parseInt(textarea.css('border-left-width')) + parseInt(textarea.css('margin-left')) + parseInt(textarea.css('padding-left'));
+			caret = textarea.caret(),
+			pointer = jQuery('<div style="width:5px;border:1px solid orange;position:absolute"></div>'),
+			virtual = jQuery('<span class="virtual">'),
+			textareaTopOfsset = parseInt(textarea.css('border-top-width')) + parseInt(textarea.css('margin-top')) + parseInt(textarea.css('padding-top')),
+			textareaLeftOfsset = parseInt(textarea.css('border-left-width')) + parseInt(textarea.css('margin-left')) + parseInt(textarea.css('padding-left'));
 
 		virtual.css({
 			'font-size': textarea.css('font-size'),
@@ -42,18 +43,17 @@
 				top: -scrollTop + textareaTopOfsset + result.lineHeight * (result.lines),
 				height: result.lineHeight + 'px'
 			})
-			// console.log('lineHeight:', result.lineHeight, ' fromLeft:', result.fromLeft, ' lines:', result.lines)
-		})
+		}).trigger('scroll');
 
 		function computeMeasures(text, width) {
 			var result = {
 				lines: 0
 			};
 			virtual.show();
-			// Výška řádku
+			// line Height
 			result.lineHeight = virtual.text("a").height();
 			
-			// počet řádek
+			// rows Count
 			var textLen = text.length,
 				newLineCharIndex = 0;
 			

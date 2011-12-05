@@ -7,6 +7,10 @@ It is first and early version which does what we need without any optimalization
 
 Getting of caret object.
 
+	caret = new Caret(document.getElementById("text"))
+	
+or with jQuery extension
+
 	caret = $('textarea').caret();
 
 ###Basic workflow with caret
@@ -77,7 +81,7 @@ Getting of caret object.
 
 		caret.set(3,10).insertBefore("before text").after("after text")
 
-* You can take it further and make complet jQuery chain using `endCaret()`
+* You can take it further and make complet jQuery chain using `endCaret()` (WHEN USING jQuery Extension)
 
 		$('textarea').caret().set(3,10).text("new text").endCaret().style('font-size', '20px')
 
@@ -91,7 +95,8 @@ There are two examples.
 
 ## Future
 
-* Make versions for other frameworks and pure javascript.
+* Check correct functions in all browsers (currently tested in Chrome, FF5, FF8)
+* Make versions for other frameworks (now only supported jQuery).
 
 
 
@@ -109,6 +114,10 @@ Inspiration came from few resources.
 ## Contribution
 
 Feel free to make optimalization, tests or anything, what good plugin needs :)
+
+Currently needs
+* tests in other browsers
+* make plugin for other frameworks
 
 Contact me schovanec@schovi.cz
 

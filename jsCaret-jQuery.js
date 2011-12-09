@@ -1,21 +1,20 @@
 ;(function(window, $) {
 	window.Caret.prototype.endCaret = function() {
-		return $(this.element);
+		return this.$element;
 	}
 
 	$.fn.caret = function() {
-		var $element = this,
-		element = $element[0];
+		var element = this[0],
+			$element = $(element);
 
 		var caretInstance;
 
 		if(caretInstance = $.data($element, 'caret')) {
 			return caretInstance;
-		}	else {
+		} else {
 			caretInstance = new Caret(element);
-			caretInstance.endCaret = function() {
-				return $element;
-			}
+			caretInstance.$element = $element;
+
 			$.data($element, 'caret', caretInstance);
 			return caretInstance;
 		}

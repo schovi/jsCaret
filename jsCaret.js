@@ -15,7 +15,7 @@
 			if (element.tagName.toLowerCase() != "textarea") {
 				// Input
 				var val = element.value,
-						range = selection.createRange().duplicate();
+					range = selection.createRange().duplicate();
 				
 				range.moveEnd("character", val.length);
 				start = (!range.text ? val.length : val.lastIndexOf(range.text));
@@ -61,8 +61,8 @@
 		// Set start and end of caret
 		set: function() {
 			var start, end, 
-					arg0 = arguments[0],
-					arg1 = arguments[1];
+				arg0 = arguments[0],
+				arg1 = arguments[1];
 
 			if(typeof arg0 === "object" && typeof arg0.start==="number" && typeof arg0.end==="number") {
 				start = arg0.start;
@@ -142,10 +142,15 @@
 
 			return this;
 		},
+		// Clear current selection
+		clear: function () {
+			this.insert("");
+			return this;
+		}
 		// Insert string to caret, or replace selection
 		insert: function(text) {
 			var caret = Caret.getCaret(this.element),
-					value = this.element.value;
+				value = this.element.value;
 
 			this.element.value = value.substr(0, caret.start) + text + value.substr(caret.end, value.length);
 
@@ -156,7 +161,7 @@
 		// Insert string before caret or selection
 		insertBefore: function(text) {
 			var caret = Caret.getCaret(this.element),
-					value = this.element.value;
+				value = this.element.value;
 
 			this.element.value = value.substr(0, caret.start) + text + value.substr(caret.start, value.length);
 
@@ -167,7 +172,7 @@
 		// Insert string after caret or selection
 		insertAfter: function(text) {
 			var caret = Caret.getCaret(this.element),
-					value = this.element.value;
+				value = this.element.value;
 
 			this.element.value = value.substr(0, caret.end) + text + value.substr(caret.end, value.length);
 
@@ -190,8 +195,8 @@
 		// Get string before caret or selection
 		before: function() {
 			var caret = Caret.getCaret(this.element),
-					arg0 = arguments[0],
-					value = this.element.value;
+				arg0 = arguments[0],
+				value = this.element.value;
 
 			if(arg0) {
 				this.element.value = arg0 + value.substring(caret.start, value.length);
@@ -204,8 +209,8 @@
 		// Get string after caret or selection
 		after: function() {
 			var caret = Caret.getCaret(this.element),
-					arg0 = arguments[0],
-					value = this.element.value;
+				arg0 = arguments[0],
+				value = this.element.value;
 
 			if(arg0) {
 				this.element.value = value.substring(0, caret.end) + arg0;

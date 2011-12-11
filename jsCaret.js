@@ -25,7 +25,7 @@
 			} else {
 				// Textarea
 				var range = selection.createRange(),
-						stored_range = range.duplicate();
+					stored_range = range.duplicate();
 
 				stored_range.moveToElementText(element);
 				stored_range.setEndPoint('EndToEnd', range);
@@ -37,7 +37,12 @@
 			end = element.selectionEnd;
 		}
 
-		return {'start': start, 'end': end};
+		return {
+			'start': start,
+			'end': end,
+			'cursor': start === end,
+			'selection': start !== end
+		};
 	};
 
 	// Helper for setting caret, or standalone using

@@ -105,9 +105,9 @@ There are two examples.
 This plugin grows from our needs.
 Inspiration came from few resources.
 
-[http://http://javascript.nwbox.com/cursor_position/](http://http://javascript.nwbox.com/cursor_position/)
+[http://http://javascript.nwbox.com/cursor_position/](http://javascript.nwbox.com/cursor_position/)
 
-[http://www.examplet.buss.hk/jquery/caret.php](http://www.examplet.buss.hk/jquery/caret.php)]
+[http://www.examplet.buss.hk/jquery/caret.php](http://www.examplet.buss.hk/jquery/caret.php)
 
 [http://code.google.com/p/jcaret/](http://code.google.com/p/jcaret/)
 

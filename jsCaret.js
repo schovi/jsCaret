@@ -151,7 +151,7 @@
 		clear: function () {
 			this.insert("");
 			return this;
-		}
+		},
 		// Insert string to caret, or replace selection
 		insert: function(text) {
 			var caret = Caret.getCaret(this.element),

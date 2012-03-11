@@ -87,7 +87,7 @@
 		},
 		// Select whole text
 		all: function() {
-			Caret.setCaret(this.element, 0, element.value.length);
+			Caret.setCaret(this.element, 0, this.element.value.length);
 			return this;
 		},
 		// Get start and end of caret
@@ -194,7 +194,7 @@
 				return this;
 			} else {
 				var caret = Caret.getCaret(this.element);
-				return element.value.substring(caret.start, caret.end);//.replace(/ /g, '\xa0') || '\xa0'
+				return this.element.value.substring(caret.start, caret.end);//.replace(/ /g, '\xa0') || '\xa0'
 			}
 		},
 		// Get string before caret or selection

@@ -111,6 +111,8 @@ Inspiration came from few resources.
 
 [http://code.google.com/p/jcaret/](http://code.google.com/p/jcaret/)
 
+[http://javascriptmvc.com/docs.html#!jQuery.fn.selection](http://javascriptmvc.com/docs.html#!jQuery.fn.selection)
+
 ## Contribution
 
 Feel free to make optimalization, tests or anything, what good plugin needs :)

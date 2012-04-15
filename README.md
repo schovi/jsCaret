@@ -89,9 +89,12 @@ or with jQuery extension
 
 There are two examples.
 
-* **simple_example.html** It shows just how to get and set cursor/selection
+* **simple_example.html** 
+                        * It shows just how to get and set cursor/selection
 
-* **custom_cursor.html** It is advanced example, where i replace default cursor with custom one (it is just graphic over, not system replace :) )
+* **custom_cursor.html** 
+                       * It is advanced example, where i replace default cursor with custom one (it is just graphic over, not system replace :) )
+                       * And it is more **proof of concept** than demonstration of this lib :D
 
 ## Future
 

@@ -118,6 +118,7 @@ Inspiration came from few resources.
 Feel free to make optimalization, tests or anything, what good plugin needs :)
 
 Currently needs
+* Works with other elements, editable elements and so
 * tests in other browsers
 * make plugin for other frameworks
 

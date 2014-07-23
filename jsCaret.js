@@ -185,6 +185,54 @@
 
 			return this;
 		},
+		// remove word
+	        removeWord: function (text, stringBetween) {
+	            var caret = Caret.getCaret(this.element);
+	            var parts = this.element.value.split(text);
+	
+	            if (typeof stringBetween === 'undefined')
+	                stringBetween = '';
+	
+	            if (parts.length > 1) {
+	                this.element.value = parts[0] + stringBetween + parts[1];
+	                Caret.setCaret(this.element, caret.start - text.length);
+	                return true;
+	            }
+	
+	            return false;
+	        },
+	        // remove text by range
+	        removeRange: function (from, to) {
+	            var newValue = this.element.substring(0, from) + this.element.substring(to);
+	            Caret.setCaret(this.element,from);
+	            this.element.value = newValue;
+	        },
+	        // get last word before caret
+	        getLastWord: function () {
+	            var wordParts;
+	            var caret = Caret.getCaret(this.element);
+	
+	            var part = this.element.value.substring(0, caret.start);
+	            var words = part.split(' ');
+	
+	            if (words.length > 1) {
+	                wordParts = words[words.length -1].split(/\n/);
+	                if (wordParts.length > 1)
+	                    return wordParts[wordParts.length -1];
+	
+	                return words[words.length -1];
+	            }
+	
+	            if (part.length > 0) {
+	                wordParts = part.split(/\n/);
+	                if (wordParts.length > 1)
+	                    return wordParts[wordParts.length -1]
+	
+	                return part;
+	            }
+	
+	            return null;
+	        },
 		// Return selected text from selection
 		text: function() {
 			var arg0 = arguments[0];
